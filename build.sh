@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+
 # bomb on any error
 set -e
 
@@ -296,9 +303,10 @@ log_action_end_msg $?
 
 log_action_begin_msg "installing Python3 and requirements"
 sudo apt-get -y update &>> ${CWD}/netflix-proxy.log\
-  && sudo apt-get -y install git python3.6 python3-venv python3-pip sqlite3 &>> ${CWD}/netflix-proxy.log\
+  && sudo apt-get -y install git python3.7 python3-venv python3-pip sqlite3 &>> ${CWD}/netflix-proxy.log\
   && python3 -m venv venv &>> ${CWD}/netflix-proxy.log\
   && source venv/bin/activate &>> ${CWD}/netflix-proxy.log\
+  && pip3 install --upgrade pip &>> ${CWD}/netflix-proxy.log\
   && pip3 install -r requirements.txt &>> ${CWD}/netflix-proxy.log\
   && pip3 install -r ${CWD}/auth/requirements.txt &>> ${CWD}/netflix-proxy.log
 log_action_end_msg $?
